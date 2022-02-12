@@ -10,5 +10,7 @@ router.route('/:id')
     .get(getUserById)
     .put(updateUserbyId)
     .delete(deleteUserbyId)
+
+router.route('/:id/friends/:id')
 // router.route('/:userId/friends/:friendId');
 module.exports = router;
