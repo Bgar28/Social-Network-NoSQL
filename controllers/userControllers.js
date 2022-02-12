@@ -61,9 +61,9 @@ const addFriendById = (req, res) => {
 }
 
 const deleteFriendById = (req, res) => {
-    User.findOneAndDelete(
+    User.findOneAndUpdate(
         { _id: req.params.id },
-        { $pull: { friends: { friendId: req.params.friendId } } },
+        { $pull: { friends: req.params.friendId } },
         { runValidators: true, new: true }
     )
         .then((userFriend) => {
