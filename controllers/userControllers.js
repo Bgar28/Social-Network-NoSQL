@@ -5,6 +5,8 @@ const getAllUser = (req, res) => {
         .then((users) => {
             res.json(users)
         })
+        .catch((err) => res.status(400).json(err))
+
 }
 
 const createUser = (req, res) => {
@@ -12,6 +14,8 @@ const createUser = (req, res) => {
         .then((userData) => {
             res.json(userData)
         })
+        .catch((err) => res.status(400).json(err))
+
 
 }
 
@@ -20,30 +24,53 @@ const getUserById = (req, res) => {
         .then((userData) => {
             res.json(userData)
         })
+        .catch((err) => res.status(400).json(err))
+
 }
 
 const updateUserbyId = (req, res) => {
     User.findOneAndUpdate(
         { _id: req.params.id },
         { $set: req.body },
-        { new: true }
-    ) .then((updatedUser) => {
+        { runValidators: true, new: true }
+    ).then((updatedUser) => {
         res.json(updatedUser)
     })
+        .catch((err) => res.status(400).json(err))
+
 }
 
 const deleteUserbyId = (req, res) => {
     User.findOneAndDelete({ _id: req.params.id })
-    .then((deletedUser) => {
-        res.json(deletedUser)
-    })
+        .then((deletedUser) => {
+            res.json(deletedUser)
+        })
+        .catch((err) => res.status(400).json(err))
 }
 
+const addFriendById = (req, res) => {
+    User.findOneAndUpdate(
+        { _id: req.params.id },
+        { $addToSet: { friends: req.params.friendId } },
+        { runValidators: true, new: true }
+    )
+        .then((userFriend) => {
+            res.json(userFriend)
+        })
+        .catch((err) => res.status(400).json(err))
+}
 
-
-
-
-
+const deleteFriendById = (req, res) => {
+    User.findOneAndDelete(
+        { _id: req.params.id },
+        { $pull: { friends: { friendId: req.params.friendId } } },
+        { runValidators: true, new: true }
+    )
+        .then((userFriend) => {
+            res.json(userFriend)
+        })
+        .catch((err) => res.status(400).json(err))
+}
 
 
 
@@ -54,5 +81,7 @@ module.exports = {
     createUser,
     getUserById,
     updateUserbyId,
-    deleteUserbyId
+    deleteUserbyId,
+    addFriendById,
+    deleteFriendById
 }

@@ -11,6 +11,6 @@ app.use(routes);
 
 db.once('open', () => {
     app.listen(PORT, () => {
-        console.log(`Connected to the Social Network backend via ${PORT} `)
+        console.log(`Connected to the Social Network backend via port:${PORT} `)
     })
 });
