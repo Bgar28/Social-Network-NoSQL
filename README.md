@@ -12,12 +12,19 @@
   * [License](#license)
    
   ## Installation
-    Clone this repository. Install the dependecies by running this command:
+Clone this repository. Install the dependecies by running this command:
+```
+npm i
+```
     
     Then start the application using nodemon by running this command:
+    ```
+    npm run dev
+    ```
 
     You then can create users for your social network using the corresponding POST route. You can update a user's information using the corresponding PUT route, as well delete a user using the corresponding DELETE route. Additionally, you can add a friend or delete that friend to a user's key value by using the corresponding POST/DELETE route. Lastly, you can get all the users (with friends) or one individual user by using the corresponding GET route. <br>
     Also, you can add thoughts for a user (think tweet or Facebook post) by using the corresponding POST route. You can update that by using the corresponding PUT route and delete that thought using the corresponding DELETE route. You can have a user react to one's thought by using the corresponding POST route and you can delete the reaction by using the corresponding DELETE route. Lastly, you can get all the thoughts (with reaction) or one individual thought by using the corresponding GET route.
+
 
   ## Usage
 
