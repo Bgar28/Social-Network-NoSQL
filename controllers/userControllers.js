@@ -1,6 +1,7 @@
 const { User } = require('../models');
 
-const getAllUser = (req, res) => {
+
+const getAllUsers = (req, res) => {
     User.find()
         .then((users) => {
             res.json(users)
@@ -16,11 +17,10 @@ const createUser = (req, res) => {
         })
         .catch((err) => res.status(400).json(err))
 
-
 }
 
 const getUserById = (req, res) => {
-    User.findOne({ _id: req.params.id })
+    User.findOne({ _id: req.params.userId })
         .then((userData) => {
             res.json(userData)
         })
@@ -30,7 +30,7 @@ const getUserById = (req, res) => {
 
 const updateUserbyId = (req, res) => {
     User.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.userId },
         { $set: req.body },
         { runValidators: true, new: true }
     ).then((updatedUser) => {
@@ -41,7 +41,7 @@ const updateUserbyId = (req, res) => {
 }
 
 const deleteUserbyId = (req, res) => {
-    User.findOneAndDelete({ _id: req.params.id })
+    User.findOneAndDelete({ _id: req.params.userId })
         .then((deletedUser) => {
             res.json(deletedUser)
         })
@@ -50,7 +50,7 @@ const deleteUserbyId = (req, res) => {
 
 const addFriendById = (req, res) => {
     User.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.userId },
         { $addToSet: { friends: req.params.friendId } },
         { runValidators: true, new: true }
     )
@@ -62,7 +62,7 @@ const addFriendById = (req, res) => {
 
 const deleteFriendById = (req, res) => {
     User.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
         { runValidators: true, new: true }
     )
@@ -77,7 +77,7 @@ const deleteFriendById = (req, res) => {
 
 
 module.exports = {
-    getAllUser,
+    getAllUsers,
     createUser,
     getUserById,
     updateUserbyId,
