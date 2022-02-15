@@ -28,7 +28,7 @@ Also, you can add thoughts for a user (think tweet or Facebook post) by using th
 
   ## Usage
 
-  This application utilizes a MongoDB database which is popular for its flexibility with unstructured data and its speed with large amounts of data. It uses the Mongoose package which is a MongoDB object modeling tool which works in an asycronchronous environment. Additionally, it uses the Express.js and Moment packages. Below, I have attached a video walkthrough and screenshots showing the socialnetworkDB within MongoDB Compass, as well as Insomnia.  <br>
+  This application utilizes a MongoDB database which is popular for its flexibility with unstructured data and its speed with large amounts of data. It uses the Mongoose package which is a MongoDB object modeling tool which works in an asycronchronous environment. Additionally, it uses the Express.js and Moment packages. The mongoose-unique-validator package disallows a user from being created with a username/email that is not unique and already in the database then displays this useful information as an error. Below, I have attached a video walkthrough and screenshots showing the socialnetworkDB within MongoDB Compass, as well as Insomnia.  <br>
   https://watch.screencastify.com/v/V2krvYNys69rdzb2CL93 <br>
   https://watch.screencastify.com/v/76s1DHUlYEdUrIyNSeFf <br>
   ![screenshot](https://github.com/Bgar28/Social-Network-NoSQL/blob/main/assets/users.png) <br>
