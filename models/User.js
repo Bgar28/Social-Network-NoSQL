@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 // schema to create user table
 const userSchema = new Schema(
@@ -36,6 +37,8 @@ const userSchema = new Schema(
         id: false
     }
 );
+
+userSchema.plugin(uniqueValidator);
 
 userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
