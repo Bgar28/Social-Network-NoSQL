@@ -12,7 +12,8 @@ const getAllThoughts = (req, res) => {
 const getThoughtById = (req, res) => {
     Thought.findOne({ _id: req.params.thoughtId })
         .then((thoughtData) => {
-            res.json(thoughtData)
+            !thoughtData? res.status(404).json({ message: 'Could not find a thought matching that ID, please try again!'})
+            : res.json(thoughtData)
         })
         .catch((err) => res.status(400).json(err))
 
@@ -28,7 +29,8 @@ const createAThought = (req, res) => {
             )
         })
         .then((thoughtData) => {
-            res.json(thoughtData)
+            !thoughtData? res.status(404).json({ message: 'Could not find a user matching that ID to create thought, please try again!'})
+            : res.json(thoughtData)
         })
         .catch((err) => res.status(400).json(err))
 
@@ -40,7 +42,8 @@ const updateThoughtById = (req, res) => {
         { $set: req.body},
         { runValidators: true, new: true}
     ).then((thoughtData) => {
-        res.json(thoughtData)
+        !thoughtData? res.status(404).json({ message: 'Could not find a thought matching that ID, please try again!'})
+            : res.json(thoughtData)
     })
         .catch((err) => res.status(400).json(err))
 }
@@ -48,7 +51,8 @@ const updateThoughtById = (req, res) => {
 const deleteThoughtById = (req, res) => {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
         .then((deletedThought) => {
-            res.json(deletedThought)
+            !deletedThought? res.status(404).json({ message: 'Could not find a thought matching that ID, please try again!'})
+            : res.json(deletedThought)
         })
             .catch((err) => res.status(400).json(err))
 }
@@ -60,7 +64,8 @@ const thoughtReaction = (req, res) => {
         { runValidators: true, new: true}
     )
         .then((reactionData) => {
-            res.json(reactionData)
+            !reactionData? res.status(404).json({ message: 'Could not find a thought matching that ID, please try again!'})
+            : res.json(reactionData)
         })
             .catch((err) => res.status(400).json(err))
 }
@@ -72,7 +77,8 @@ const deleteReaction = (req, res) => {
         { runValidators: true, new: true}
     )
         .then((reactionData) => {
-            res.json(reactionData)
+            !reactionData? res.status(404).json({ message: 'Could not find a thought or reaction matching that ID, please try again!'})
+            : res.json(reactionData)
         })
             .catch((err) => res.status(err))
 }
