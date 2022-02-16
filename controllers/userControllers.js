@@ -22,7 +22,8 @@ const createUser = (req, res) => {
 const getUserById = (req, res) => {
     User.findOne({ _id: req.params.userId })
         .then((userData) => {
-            res.json(userData)
+            !userData ? res.status(404).json({ message: 'Could not find a user matching that ID, please try again!'})
+            : res.json(userData)
         })
         .catch((err) => res.status(400).json(err))
 
@@ -34,7 +35,8 @@ const updateUserbyId = (req, res) => {
         { $set: req.body },
         { runValidators: true, new: true }
     ).then((updatedUser) => {
-        res.json(updatedUser)
+        !updatedUser ? res.status(404).json({ message: 'Could not find a user matching that ID, please try again!'})
+        : res.json(updatedUser)
     })
         .catch((err) => res.status(400).json(err))
 
@@ -43,7 +45,8 @@ const updateUserbyId = (req, res) => {
 const deleteUserbyId = (req, res) => {
     User.findOneAndDelete({ _id: req.params.userId })
         .then((deletedUser) => {
-            res.json(deletedUser)
+            !deletedUser ? res.status(404).json({ message: 'Could not find a user matching that ID, please try again!'})
+            : res.json(deletedUser)
         })
         .catch((err) => res.status(400).json(err))
 }
@@ -55,7 +58,8 @@ const addFriendById = (req, res) => {
         { runValidators: true, new: true }
     )
         .then((userFriend) => {
-            res.json(userFriend)
+            !userFriend ? res.status(404).json({ message: 'Could not find a user matching that ID, please try again!'})
+            : res.json(userFriend)
         })
         .catch((err) => res.status(400).json(err))
 }
@@ -67,7 +71,8 @@ const deleteFriendById = (req, res) => {
         { runValidators: true, new: true }
     )
         .then((userFriend) => {
-            res.json(userFriend)
+            !userFriend ? res.status(404).json({ message: 'Could not find a user matching that ID, please try again!'})
+            : res.json(userFriend)
         })
         .catch((err) => res.status(400).json(err))
 }
